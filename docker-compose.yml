@@ -1,0 +1,51 @@
+version: "3.8"
+
+services:
+  db:
+    image: postgres:16
+    container_name: postgres-revendas
+    environment:
+      POSTGRES_USER: adianti
+      POSTGRES_PASSWORD: senha123
+      POSTGRES_DB: revendas
+    networks:
+      - g6_educacao
+    volumes:
+      - ./postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5433:5432"
+
+  webserver-revenda:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: php-revendas
+    networks:
+      - g6_educacao
+    volumes:
+      - ./:/app
+      - ./vendor:/app/vendor
+    ports:
+      - "9000:9000"
+    depends_on:
+      - db
+    working_dir: /app
+
+  nginx:
+    image: nginx:alpine
+    container_name: nginx-revendas
+    networks:
+      - g6_educacao
+    volumes:
+      - ./:/app
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf:ro
+    ports:
+      - "3000:80"
+    depends_on:
+      - webserver-revenda
+
+volumes:
+  postgres_data:
+networks:
+  g6_educacao:
+    driver: bridge

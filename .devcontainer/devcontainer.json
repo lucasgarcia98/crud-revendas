@@ -1,0 +1,311 @@
+{
+  "name": "revendas-adianti",
+  "dockerComposeFile": [
+    "../docker-compose.yml"
+  ],
+  "workspaceFolder": "/app/",
+  "service": "webserver-revenda",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "adpyke.codesnap",
+        "adpyke.vscode-sql-formatter",
+        "anseki.vscode-color",
+        "bierner.color-info",
+        "bmewburn.vscode-intelephense-client",
+        "bradymholt.pgformatter",
+        "chrisdias.vscode-opennewinstance",
+        "christian-kohler.path-intellisense",
+        "codeium.codeium",
+        "donjayamanne.githistory",
+        "dracula-theme.theme-dracula",
+        "dudemelo.php-essentials",
+        "eamodio.gitlens",
+        "ecodes.vscode-phpmd",
+        "editorconfig.editorconfig",
+        "equinusocio.vsc-material-theme-icons",
+        "expo.vscode-expo-tools",
+        "formulahendry.auto-rename-tag",
+        "formulahendry.docker-explorer",
+        "formulahendry.docker-extension-pack",
+        "futureglobe.sepaswitch",
+        "jock.svg",
+        "mechatroner.rainbow-csv",
+        "meganrogge.template-string-converter",
+        "mehedidracula.php-constructor",
+        "mhutchie.git-graph",
+        "mohd-akram.vscode-html-format",
+        "ms-azuretools.vscode-docker",
+        "ms-ceintl.vscode-language-pack-pt-br",
+        "ms-kubernetes-tools.vscode-kubernetes-tools",
+        "ms-vscode-remote.remote-containers",
+        "ms-vscode-remote.remote-ssh",
+        "ms-vscode-remote.remote-ssh-edit",
+        "ms-vscode-remote.remote-wsl",
+        "ms-vscode.remote-explorer",
+        "ms-vscode.remote-server",
+        "ms-vscode.test-adapter-converter",
+        "ms-vscode.vscode-typescript-next",
+        "ms-vsliveshare.vsliveshare",
+        "mtxr.sqltools",
+        "mtxr.sqltools-driver-mysql",
+        "mtxr.sqltools-driver-pg",
+        "mtxr.sqltools-driver-sqlite",
+        "naumovs.color-highlight",
+        "negokaz.live-server-preview",
+        "oderwat.indent-rainbow",
+        "pdconsec.vscode-print",
+        "pkief.material-icon-theme",
+        "recca0120.vscode-phpunit",
+        "redhat.vscode-xml",
+        "redhat.vscode-yaml",
+        "ritwickdey.liveserver",
+        "streetsidesoftware.code-spell-checker",
+        "vmware.vscode-manifest-yaml",
+        "wongjn.php-sniffer",
+        "xdebug.php-debug",
+        "zobo.php-intellisense"
+      ],
+      "settings": {
+        "yaml.schemas": {
+          "file:///root/.vscode-server/extensions/atlassian.atlascode-3.2.1/resources/schemas/pipelines-schema.json": "bitbucket-pipelines.yml"
+        },
+        "workbench.iconTheme": "material-icon-theme",
+        "atlascode.bitbucket.enabled": true,
+        "atlascode.jira.enabled": false,
+        "security.workspace.trust.untrustedFiles": "open",
+        "files.maxMemoryForLargeFilesMB": 999999999,
+        "git.confirmSync": false,
+        "redhat.telemetry.enabled": false,
+        "[prisma]": {
+          "editor.formatOnSave": true,
+          "editor.defaultFormatter": "Prisma.prisma"
+        },
+        "[json]": {
+          "editor.formatOnSave": false,
+          "editor.defaultFormatter": "vscode.json-language-features"
+        },
+        "git.autofetch": true,
+        "workbench.editorAssociations": {
+          "*.json": "default",
+          "*.db": "default",
+          "*.wt": "default",
+          "*.sql": "default",
+          "*.pfx": "default",
+          "*.gz": "default"
+        },
+        "editor.formatOnSave": true,
+        "[php]": {
+          "editor.defaultFormatter": "bmewburn.vscode-intelephense-client"
+        },
+        "typescript.updateImportsOnFileMove.enabled": "always",
+        "diffEditor.ignoreTrimWhitespace": false,
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
+        "prettier.singleQuote": true,
+        "workbench.startupEditor": "none",
+        "thunder-client.codeSnippetLanguage": "cs-httpclient",
+        "gitlens.gitCommands.skipConfirmations": [
+          "fetch:command",
+          "stash-push:command",
+          "switch:command",
+          "branch-create:command"
+        ],
+        "gitlens.advanced.messages": {
+          "suppressCreatePullRequestPrompt": true
+        },
+        "[xml]": {
+          "editor.defaultFormatter": "redhat.vscode-xml"
+        },
+        "editor.fontLigatures": true,
+        "editor.fontFamily": "'Fira Code'",
+        "terminal.integrated.fontFamily": "monospace",
+        "javascript.updateImportsOnFileMove.enabled": "always",
+        "liveServer.settings.donotShowInfoMsg": true,
+        "terminal.integrated.defaultProfile.windows": "Git Bash",
+        "[blade]": {
+          "editor.defaultFormatter": "shufo.vscode-blade-formatter"
+        },
+        "material-icon-theme.activeIconPack": "nest",
+        "explorer.confirmDragAndDrop": false,
+        "explorer.compactFolders": false,
+        "csv-preview.separator": ";",
+        "material-icon-theme.folders.associations": {
+          "adapters": "contract",
+          "grpc": "pipe",
+          "kube": "kubernetes",
+          "main": "lib",
+          "websockets": "pipe",
+          "implementations": "core",
+          "protos": "pipe",
+          "entities": "class",
+          "kafka": "pipe",
+          "use-cases": "functions",
+          "migrations": "tools",
+          "schemas": "class",
+          "useCases": "functions",
+          "eslint-config": "tools",
+          "typeorm": "database",
+          "_shared": "shared",
+          "mappers": "meta",
+          "fakes": "mock",
+          "modules": "components",
+          "subscribers": "messages",
+          "domain": "class",
+          "protocols": "contract",
+          "infra": "app",
+          "view-models": "views",
+          "presentation": "template",
+          "dtos": "typescript",
+          "http": "container",
+          "providers": "include",
+          "factories": "class",
+          "repositories": "mappings"
+        },
+        "yaml.customTags": [
+          "!And",
+          "!And sequence",
+          "!If",
+          "!If sequence",
+          "!Not",
+          "!Not sequence",
+          "!Equals",
+          "!Equals sequence",
+          "!Or",
+          "!Or sequence",
+          "!FindInMap",
+          "!FindInMap sequence",
+          "!Base64",
+          "!Join",
+          "!Join sequence",
+          "!Cidr",
+          "!Ref",
+          "!Sub",
+          "!Sub sequence",
+          "!GetAtt",
+          "!GetAZs",
+          "!ImportValue",
+          "!ImportValue sequence",
+          "!Select",
+          "!Select sequence",
+          "!Split",
+          "!Split sequence"
+        ],
+        "CodeGPT.query.language": "Portuguese",
+        "CodeGPT.model": "text-davinci-003",
+        "files.associations": {
+          "*.tsx": "typescriptreact",
+          "*.php": "php",
+          "*.prisma": "prisma",
+          "*.yml": "yaml"
+        },
+        "tabnine.experimentalAutoImports": true,
+        "discord.detailsIdling": "Programando",
+        "discord.detailsEditing": "Editando {file_name}",
+        "discord.lowerDetailsEditing": "Projeto: {workspace}",
+        "editor.codeActionsOnSave": {
+          "source.organizeImports": "explicit"
+        },
+        "git.openRepositoryInParentFolders": "never",
+        "editor.guides.bracketPairs": true,
+        "editor.bracketPairColorization.enabled": false,
+        "editor.tabSize": 2,
+        "thunder-client.httpLibrary": "axios",
+        "thunder-client.certificates": [
+          {
+            "host": "secure.api.cloud.itau.com.br",
+            "certPath": "/home/windel/Música/cert.pem",
+            "keyPath": "/home/windel/Música/key.key"
+          }
+        ],
+        "[typescript]": {
+          "editor.defaultFormatter": "esbenp.prettier-vscode"
+        },
+        "[typescriptreact]": {
+          "editor.defaultFormatter": "esbenp.prettier-vscode"
+        },
+        "files.exclude": {
+          "**/.git": false
+        },
+        "[handlebars]": {
+          "editor.defaultFormatter": "vscode.html-language-features"
+        },
+        "remote.autoForwardPortsSource": "hybrid",
+        "workbench.settings.applyToAllProfiles": [
+          "prettier.singleQuote"
+        ],
+        "git.suggestSmartCommit": false,
+        "extensions.ignoreRecommendations": true,
+        "terminal.integrated.env.linux": {},
+        "terminal.integrated.env.windows": {},
+        "prisma.showPrismaDataPlatformNotification": false,
+        "thunder-client.htmlReportResponseLimit": 20000,
+        "thunder-client.responseLimit": 30,
+        "[html]": {
+          "editor.defaultFormatter": "mohd-akram.vscode-html-format"
+        },
+        "gitlens.views.branches.branches.layout": "list",
+        "scm.experimental.showHistoryGraph": true,
+        "editor.maxTokenizationLineLength": 2000000,
+        "codeium.enableConfig": {
+          "*": true,
+          "properties": true,
+          "shellscript": false,
+          "markdown": true,
+          "prisma": true
+        },
+        "prettier.configPath": "./.prettierrc",
+        "console-ninja.toolsToEnableSupportAutomaticallyFor": {
+          "live-server-extension": true
+        },
+        "console-ninja.featureSet": "Community",
+        "console-ninja.captureFunctions": true,
+        "vs-kubernetes": {
+          "vscode-kubernetes.helm-path-linux": "/home/windel/.local/state/vs-kubernetes/tools/helm/linux-amd64/helm",
+          "vscode-kubernetes.minikube-path-linux": "/home/windel/.local/state/vs-kubernetes/tools/minikube/linux-amd64/minikube",
+          "vscode-kubernetes.kubectl-path-linux": "/home/windel/.local/state/vs-kubernetes/tools/kubectl/kubectl"
+        },
+        "[dockerfile]": {
+          "editor.defaultFormatter": "ms-azuretools.vscode-docker"
+        },
+        "liveServer.settings.donotVerifyTags": true,
+        "git.ignoreRebaseWarning": true,
+        "sqltools.useNodeRuntime": true,
+        "[sql]": {
+          "editor.defaultFormatter": "adpyke.vscode-sql-formatter"
+        },
+        "intelephense.files.exclude": [
+          "**/.git/**",
+          "**/.svn/**",
+          "**/.hg/**",
+          "**/CVS/**",
+          "**/.DS_Store/**",
+          "**/node_modules/**",
+          "**/bower_components/**",
+          "**/vendor/**/{Tests,tests}/**",
+          "**/.history/**",
+          "**/vendor/**/vendor/**",
+          "**/framework/**"
+        ],
+        "console-ninja.maxLogViewerEntries": 15000000,
+        "svg.preview.mode": "svg",
+        "gitlens.telemetry.enabled": false,
+        "rest-client.enableTelemetry": false,
+        "phpcs.executablePath": "./vendor/bin/phpcs",
+        "phpcs.standard": "phpcs.xml",
+        "phpcs.autoConfigSearch": false,
+        "phpcs.trace.server": "verbose",
+        "phpmd.command": "./vendor/bin/phpmd",
+        "phpmd.rules": "phpmd.xml",
+        "phpmd.verbose": true,
+        "phpSniffer.executablesFolder": "./vendor/bin",
+        "phpSniffer.run": "onSave",
+        "phpSniffer.standard": "./phpcs.xml",
+        "eslint.useESLintClass": true,
+        "eslint.format.enable": true,
+        "eslint.useFlatConfig": false,
+        "eslint.debug": true,
+        "eslint.execArgv": null
+      }
+    }
+  }
+}
