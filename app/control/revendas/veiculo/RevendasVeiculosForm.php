@@ -1,5 +1,7 @@
 <?php
-class RevendasFabricantesForm extends TStandardForm
+
+use Adianti\Validator\TMinValueValidator;
+class RevendasVeiculosForm extends TStandardForm
 {
     protected $form; // form
 
@@ -14,36 +16,45 @@ class RevendasFabricantesForm extends TStandardForm
         parent::setTargetContainer('adianti_right_panel');
 
         // creates the form
-        $this->form = new BootstrapFormBuilder('form_Fabricantes');
-        $this->form->setFormTitle(_t('Program'));
+        $this->form = new BootstrapFormBuilder('form_Veiculo');
+        $this->form->setFormTitle('Veículo');
         $this->form->enableClientValidation();
 
         // defines the database
         parent::setDatabase('revendas');
 
         // defines the active record
-        parent::setActiveRecord('Fabricante');
+        parent::setActiveRecord('Veiculo');
 
         // create the form fields
         $id = new TEntry('id');
-        $nome = new TEntry('nome');
-        $logo  = new TFile('logo');
-        
-        $logo->setAllowedExtensions( ['jpg'] );
-        $logo->enableImageGallery();
-        $logo->setDisplayMode('file');
+        $descricao = new TEntry('descricao');
+        $placa = new TEntry('placa');
+        $ano = new TEntry('ano');
+
+        $ano->addValidation('Ano', new TMinValueValidator, array(1950));
+        $cor = new TCombo('cor');
+        $cor->addItems(['Branco' => 'Branco', 'Preto' => 'Preto', 'Prata' => 'Prata', 'Vermelho' => 'Vermelho', 'Azul' => 'Azul', 'Verde' => 'Verde', 'Amarelo' => 'Amarelo', 'Laranja' => 'Laranja', 'Rosa' => 'Rosa', 'Roxo' => 'Roxo', 'Marrom' => 'Marrom', 'Bege' => 'Bege', 'Cinza' => 'Cinza', 'Dourado' => 'Dourado', 'Outra' => 'Outra']);
+        $km = new TEntry('km');
+        $valor = new TNumeric('valor', 2, ',', '.', true);
+        $obs = new TText('obs');
+
         $id->setEditable(false);
 
         // add the fields
         $this->form->addFields([new TLabel('ID')], [$id]);
-        $this->form->addFields([new TLabel('Nome')], [$nome]);
-        $this->form->addFields([new TLabel('Logo')], [$logo]);
+        $this->form->addFields([new TLabel('Descricao')], [$descricao]);
+        $this->form->addFields([new TLabel('Placa')], [$placa]);
+        $this->form->addFields([new TLabel('Ano')], [$ano]);
+        $this->form->addFields([new TLabel('Cor')], [$cor]);
+        $this->form->addFields([new TLabel('Km')], [$km]);
+        $this->form->addFields([new TLabel('Valor')], [$valor]);
+        $this->form->addFields([new TLabel('Obs')], [$obs]);
+
         $id->setSize('30%');
-        $nome->setSize('100%');
-        $logo->setSize('100%');
 
         // validations
-        $nome->addValidation('nome', new TRequiredValidator);
+        $descricao->addValidation('descricao', new TRequiredValidator);
 
         // add form actions
         $btn = $this->form->addAction(_t('Save'), new TAction(array($this, 'onSave')), 'far:save');
@@ -56,7 +67,6 @@ class RevendasFabricantesForm extends TStandardForm
 
         $container = new TVBox;
         $container->style = 'width: 100%';
-        // $container->add(new TXMLBreadCrumb('menu.xml','SystemProgramList'));
         $container->add($this->form);
 
         // add the container to the page
@@ -77,8 +87,9 @@ class RevendasFabricantesForm extends TStandardForm
                 TTransaction::open($this->database);
                 $class = $this->activeRecord;
                 $object = new $class($key);
-                $object->logo = 'tmp/' . $object->logo;
-                
+                echo '<pre>';
+                print_r($object);
+                echo '</pre>';
                 $this->form->setData($object);
 
                 TTransaction::close();
@@ -105,35 +116,22 @@ class RevendasFabricantesForm extends TStandardForm
 
             $data = $this->form->getData();
 
-            $object = new Fabricante;
+            $object = new Veiculo;
             $object->id = $data->id;
-            $object->nome = $data->nome;
-            $object->logo = $data->logo;
+            $object->descricao = $data->descricao;
+            $object->placa = $data->placa;
+            $object->cor = $data->cor;
+            $object->km = $data->km;
+            $object->valor = $data->valor;
+            $object->obs = $data->obs;
 
             $this->form->validate();
             $object->store();
-            if (!is_writable('tmp/' . $object->logo))
-            {
-                throw new Exception(AdiantiCoreTranslator::translate('Permission denied') . ': tmp/' . $object->logo);
-            }
-            
-            if ($object->logo)
-            {
-                $source_file   = 'tmp/'.$object->logo;
-                $target_file   = 'tmp/images/' . $object->logo;
-                $finfo         = new finfo(FILEINFO_MIME_TYPE);
-                
-                if (file_exists($source_file) AND $finfo->file($source_file) == 'image/jpeg')
-                {
-                    // move to the target directory
-                    rename($source_file, $target_file);
-                }
-            }
-            
+
             $this->form->setData($object);
 
             TTransaction::close();
-            $pos_action = new TAction(['RevendasFabricantesList', 'onReload']);
+            $pos_action = new TAction(['RevendasVeiculosList', 'onReload']);
             new TMessage('info', AdiantiCoreTranslator::translate('Record saved'), $pos_action);
 
             return $object;
@@ -155,5 +153,4 @@ class RevendasFabricantesForm extends TStandardForm
         TScript::create("Template.closeRightPanel()");
     }
 
-    
 }

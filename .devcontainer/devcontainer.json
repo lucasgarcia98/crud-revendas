@@ -61,8 +61,6 @@
         "ritwickdey.liveserver",
         "streetsidesoftware.code-spell-checker",
         "vmware.vscode-manifest-yaml",
-        "wongjn.php-sniffer",
-        "xdebug.php-debug",
         "zobo.php-intellisense"
       ],
       "settings": {

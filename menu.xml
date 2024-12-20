@@ -46,16 +46,20 @@
     </menuitem>
 
 
-    <menuitem label='_t{Revendas}'>
+    <menuitem label='Revendas'>
         <icon>fas:building fa-fw</icon>
         <menu>
-            <menuitem label='_t{Fabricantes}'>
+            <menuitem label='Fabricantes'>
                 <icon>fas:users fa-fw</icon>
                 <action>RevendasFabricantesList</action>
             </menuitem>
-            <menuitem label='_t{Acessorios}'>
+            <menuitem label='Acessorios'>
                 <icon>fas:users fa-fw</icon>
                 <action>RevendasAcessoriosList</action>
+            </menuitem>
+            <menuitem label='Veículos'>
+                <icon>fas:users fa-fw</icon>
+                <action>RevendasVeiculosList</action>
             </menuitem>
         </menu>
     </menuitem>

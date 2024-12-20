@@ -1,16 +1,14 @@
 <?php
 
 use Adianti\Database\TRecord;
-class Cliente extends TRecord
+class Veiculo extends TRecord
 {
-  const TABLENAME = 'clientes';
-  const PRIMARYKEY = 'id';
-  const IDPOLICY =  'max'; // {max, serial}
+    const TABLENAME = 'veiculos';
+    const PRIMARYKEY = 'id';
+    const IDPOLICY = 'max'; // {max, serial}
 
-  private $fabricante;
-  private $acessorios = [];
 
-  public function __construct($id = NULL, $callObjectLoad = TRUE)
+    public function __construct($id = NULL, $callObjectLoad = TRUE)
     {
         parent::__construct($id, $callObjectLoad);
         parent::addAttribute('descricao');
@@ -24,8 +22,7 @@ class Cliente extends TRecord
 
     public function get_fabricante()
     {
-        if (empty($this->fabricante) && !empty($this->fabricante_id))
-        {
+        if (empty($this->fabricante) && !empty($this->fabricante_id)) {
             $this->fabricante = new Fabricante($this->fabricante_id);
         }
 

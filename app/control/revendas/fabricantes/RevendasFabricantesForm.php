@@ -15,7 +15,7 @@ class RevendasFabricantesForm extends TStandardForm
 
         // creates the form
         $this->form = new BootstrapFormBuilder('form_Fabricantes');
-        $this->form->setFormTitle(_t('Program'));
+        $this->form->setFormTitle('Fabricante');
         $this->form->enableClientValidation();
 
         // defines the database
@@ -27,9 +27,9 @@ class RevendasFabricantesForm extends TStandardForm
         // create the form fields
         $id = new TEntry('id');
         $nome = new TEntry('nome');
-        $logo  = new TFile('logo');
-        
-        $logo->setAllowedExtensions( ['jpg'] );
+        $logo = new TFile('logo');
+
+        $logo->setAllowedExtensions(['jpg']);
         $logo->enableImageGallery();
         $logo->setDisplayMode('file');
         $id->setEditable(false);
@@ -78,7 +78,7 @@ class RevendasFabricantesForm extends TStandardForm
                 $class = $this->activeRecord;
                 $object = new $class($key);
                 $object->logo = 'tmp/' . $object->logo;
-                
+
                 $this->form->setData($object);
 
                 TTransaction::close();
@@ -112,24 +112,21 @@ class RevendasFabricantesForm extends TStandardForm
 
             $this->form->validate();
             $object->store();
-            if (!is_writable('tmp/' . $object->logo))
-            {
+            if (!is_writable('tmp/' . $object->logo)) {
                 throw new Exception(AdiantiCoreTranslator::translate('Permission denied') . ': tmp/' . $object->logo);
             }
-            
-            if ($object->logo)
-            {
-                $source_file   = 'tmp/'.$object->logo;
-                $target_file   = 'tmp/images/' . $object->logo;
-                $finfo         = new finfo(FILEINFO_MIME_TYPE);
-                
-                if (file_exists($source_file) AND $finfo->file($source_file) == 'image/jpeg')
-                {
+
+            if ($object->logo) {
+                $source_file = 'tmp/' . $object->logo;
+                $target_file = 'tmp/images/' . $object->logo;
+                $finfo = new finfo(FILEINFO_MIME_TYPE);
+
+                if (file_exists($source_file) and $finfo->file($source_file) == 'image/jpeg') {
                     // move to the target directory
                     rename($source_file, $target_file);
                 }
             }
-            
+
             $this->form->setData($object);
 
             TTransaction::close();
@@ -155,5 +152,5 @@ class RevendasFabricantesForm extends TStandardForm
         TScript::create("Template.closeRightPanel()");
     }
 
-    
+
 }

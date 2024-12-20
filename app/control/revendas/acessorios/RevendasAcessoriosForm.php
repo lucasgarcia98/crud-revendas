@@ -15,7 +15,7 @@ class RevendasAcessoriosForm extends TStandardForm
 
         // creates the form
         $this->form = new BootstrapFormBuilder('form_Acessorios');
-        $this->form->setFormTitle(_t('Program'));
+        $this->form->setFormTitle('Acessório');
         $this->form->enableClientValidation();
 
         // defines the database
@@ -27,13 +27,13 @@ class RevendasAcessoriosForm extends TStandardForm
         // create the form fields
         $id = new TEntry('id');
         $descricao = new TEntry('descricao');
-        
+
         $id->setEditable(false);
 
         // add the fields
         $this->form->addFields([new TLabel('ID')], [$id]);
         $this->form->addFields([new TLabel('Descricao')], [$descricao]);
-        
+
         $id->setSize('30%');
         $descricao->setSize('100%');
 
@@ -72,7 +72,7 @@ class RevendasAcessoriosForm extends TStandardForm
                 TTransaction::open($this->database);
                 $class = $this->activeRecord;
                 $object = new $class($key);
-                
+
                 $this->form->setData($object);
 
                 TTransaction::close();
@@ -105,7 +105,7 @@ class RevendasAcessoriosForm extends TStandardForm
 
             $this->form->validate();
             $object->store();
-            
+
             $this->form->setData($object);
 
             TTransaction::close();
@@ -131,5 +131,5 @@ class RevendasAcessoriosForm extends TStandardForm
         TScript::create("Template.closeRightPanel()");
     }
 
-    
+
 }
