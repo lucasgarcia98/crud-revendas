@@ -58,7 +58,6 @@ class RevendasFabricantesForm extends TStandardForm
         $container->style = 'width: 100%';
         // $container->add(new TXMLBreadCrumb('menu.xml','SystemProgramList'));
         $container->add($this->form);
-
         // add the container to the page
         parent::add($container);
     }
@@ -151,6 +150,4 @@ class RevendasFabricantesForm extends TStandardForm
     {
         TScript::create("Template.closeRightPanel()");
     }
-
-
 }

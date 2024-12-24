@@ -4,12 +4,10 @@ use Adianti\Log\TLoggerSTD;
 use Adianti\Validator\TMinValueValidator;
 use Adianti\Widget\Form\TSpinner;
 use Adianti\Widget\Wrapper\TDBMultiCombo;
-class RevendasVeiculosForm extends TStandardForm
+class RevendasVendasForm extends TStandardForm
 {
     protected $form; // form
 
-    private $fabricante_list = [];
-    protected $acessorios_list;
     /**
      * Class constructor
      * Creates the page and the registration form
@@ -21,7 +19,7 @@ class RevendasVeiculosForm extends TStandardForm
         parent::setTargetContainer('adianti_right_panel');
 
         // creates the form
-        $this->form = new BootstrapFormBuilder('form_Veiculo');
+        $this->form = new BootstrapFormBuilder('form_Venda');
         $this->form->setFormTitle('Veículo');
         $this->form->enableClientValidation();
 
@@ -29,53 +27,34 @@ class RevendasVeiculosForm extends TStandardForm
         parent::setDatabase('revendas');
 
         // defines the active record
-        parent::setActiveRecord('Veiculo');
+        parent::setActiveRecord('Venda');
 
         // create the form fields
         $id = new TEntry('id');
 
-        $descricao = new TEntry('descricao');
+        $dt_venda = new TEntry('dt_venda');
+        $dt_venda->setMask('99/99/9999');
+        $dt_venda->setValue(date('d/m/Y'));
 
-        $placa = new TEntry('placa');
-        $placa->setMaxLength(8);
-
-        $ano = new TSpinner('ano');
-        $ano->setRange(1900, date('Y') + 10, 1);
-        $ano->addValidation('ano', new TMinValueValidator, ['min' => 1900]);
-        $ano->setValue(date('Y'));
-
-        $cor = new TCombo('cor');
-        $itemsCor = ['Branco' => 'Branco', 'Preto' => 'Preto', 'Prata' => 'Prata', 'Vermelho' => 'Vermelho', 'Azul' => 'Azul', 'Verde' => 'Verde', 'Amarelo' => 'Amarelo', 'Laranja' => 'Laranja', 'Rosa' => 'Rosa', 'Roxo' => 'Roxo', 'Marrom' => 'Marrom', 'Bege' => 'Bege', 'Cinza' => 'Cinza', 'Dourado' => 'Dourado', 'Outra' => 'Outra'];
-        $cor->addItems($itemsCor);
-        $cor->enableSearch();
-        $cor->setSize('100%');
-
-        $km = new TSpinner('km');
         $valor = new TNumeric('valor', 2, ',', '.', true);
-
         $obs = new TText('obs');
 
-        $fabricante_id = new TDBCombo('fabricante_id', 'revendas', 'Fabricante', 'id', 'nome');
-        $acessorios = new TDBMultiCombo('acessorios', 'revendas', 'Acessorio', 'id', 'descricao');
-        $acessorios->setSize('100%');
+        $cliente_id = new TDBCombo('cliente_id', 'revendas', 'Cliente', 'id', 'nome');
+        $veiculo_id = new TDBCombo('veiculo_id', 'revendas', 'Veiculo', 'id', 'descricao');
 
         $id->setEditable(false);
 
         // add the fields
         $this->form->addFields([new TLabel('ID')], [$id]);
-        $this->form->addFields([new TLabel('Descricao')], [$descricao]);
-        $this->form->addFields([new TLabel('Placa')], [$placa]);
-        $this->form->addFields([new TLabel('Ano')], [$ano]);
-        $this->form->addFields([new TLabel('Cor')], [$cor]);
-        $this->form->addFields([new TLabel('Km')], [$km]);
+        $this->form->addFields([new TLabel('Data da Venda')], [$dt_venda]);
         $this->form->addFields([new TLabel('Valor')], [$valor]);
         $this->form->addFields([new TLabel('Obs')], [$obs]);
-        $this->form->addFields([new TLabel('Fabricante')], [$fabricante_id]);
-        $this->form->addFields([new TLabel('Acessórios')], [$acessorios]);
+        $this->form->addFields([new TLabel('Cliente')], [$cliente_id]);
+        $this->form->addFields([new TLabel('Veículo')], [$veiculo_id]);
         $id->setSize('30%');
 
         // validations
-        $descricao->addValidation('descricao', new TRequiredValidator);
+        $dt_venda->addValidation('dt_venda', new TRequiredValidator);
 
         // add form actions
         $btn = $this->form->addAction(_t('Save'), new TAction(array($this, 'onSave')), 'far:save');
@@ -109,8 +88,6 @@ class RevendasVeiculosForm extends TStandardForm
                 $class = $this->activeRecord;
                 $object = new $class($key);
 
-                $object->acessorios = array_column($object->getVeiculosAcessorios(), 'id');
-
                 $this->form->setData($object);
 
                 TTransaction::close();
@@ -138,23 +115,16 @@ class RevendasVeiculosForm extends TStandardForm
 
             $data = $this->form->getData();
 
-            $object = new Veiculo();
+            $object = new Venda();
             $object->fromArray((array) $data);
 
             $this->form->validate();
             $object->store();
-            $object->clearParts();
-
-            if (!empty($data->acessorios)) {
-                foreach ($data->acessorios as $acessorio_id) {
-                    $object->addAcessorio(new Acessorio($acessorio_id));
-                }
-            }
 
             $this->form->setData($object);
 
             TTransaction::close();
-            $pos_action = new TAction(['RevendasVeiculosList', 'onReload']);
+            $pos_action = new TAction(['RevendasVendasList', 'onReload']);
             new TMessage('info', AdiantiCoreTranslator::translate('Record saved'), $pos_action);
 
             return $object;

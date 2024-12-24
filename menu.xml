@@ -53,13 +53,21 @@
                 <icon>fas:users fa-fw</icon>
                 <action>RevendasFabricantesList</action>
             </menuitem>
-            <menuitem label='Acessorios'>
+            <menuitem label='Acessórios'>
                 <icon>fas:users fa-fw</icon>
                 <action>RevendasAcessoriosList</action>
             </menuitem>
             <menuitem label='Veículos'>
                 <icon>fas:users fa-fw</icon>
                 <action>RevendasVeiculosList</action>
+            </menuitem>
+            <menuitem label='Clientes'>
+                <icon>fas:users fa-fw</icon>
+                <action>RevendasClientesList</action>
+            </menuitem>
+            <menuitem label='Vendas'>
+                <icon>fas:users fa-fw</icon>
+                <action>RevendasVendasList</action>
             </menuitem>
         </menu>
     </menuitem>

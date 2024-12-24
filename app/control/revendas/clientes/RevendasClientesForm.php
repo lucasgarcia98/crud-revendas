@@ -1,15 +1,8 @@
 <?php
-
-use Adianti\Log\TLoggerSTD;
-use Adianti\Validator\TMinValueValidator;
-use Adianti\Widget\Form\TSpinner;
-use Adianti\Widget\Wrapper\TDBMultiCombo;
-class RevendasVeiculosForm extends TStandardForm
+class RevendasClientesForm extends TStandardForm
 {
     protected $form; // form
 
-    private $fabricante_list = [];
-    protected $acessorios_list;
     /**
      * Class constructor
      * Creates the page and the registration form
@@ -21,61 +14,73 @@ class RevendasVeiculosForm extends TStandardForm
         parent::setTargetContainer('adianti_right_panel');
 
         // creates the form
-        $this->form = new BootstrapFormBuilder('form_Veiculo');
-        $this->form->setFormTitle('Veículo');
+        $this->form = new BootstrapFormBuilder('form_Clientes');
+        $this->form->setFormTitle('Cliente');
         $this->form->enableClientValidation();
 
         // defines the database
         parent::setDatabase('revendas');
 
         // defines the active record
-        parent::setActiveRecord('Veiculo');
+        parent::setActiveRecord('Cliente');
 
         // create the form fields
         $id = new TEntry('id');
-
-        $descricao = new TEntry('descricao');
-
-        $placa = new TEntry('placa');
-        $placa->setMaxLength(8);
-
-        $ano = new TSpinner('ano');
-        $ano->setRange(1900, date('Y') + 10, 1);
-        $ano->addValidation('ano', new TMinValueValidator, ['min' => 1900]);
-        $ano->setValue(date('Y'));
-
-        $cor = new TCombo('cor');
-        $itemsCor = ['Branco' => 'Branco', 'Preto' => 'Preto', 'Prata' => 'Prata', 'Vermelho' => 'Vermelho', 'Azul' => 'Azul', 'Verde' => 'Verde', 'Amarelo' => 'Amarelo', 'Laranja' => 'Laranja', 'Rosa' => 'Rosa', 'Roxo' => 'Roxo', 'Marrom' => 'Marrom', 'Bege' => 'Bege', 'Cinza' => 'Cinza', 'Dourado' => 'Dourado', 'Outra' => 'Outra'];
-        $cor->addItems($itemsCor);
-        $cor->enableSearch();
-        $cor->setSize('100%');
-
-        $km = new TSpinner('km');
-        $valor = new TNumeric('valor', 2, ',', '.', true);
-
-        $obs = new TText('obs');
-
-        $fabricante_id = new TDBCombo('fabricante_id', 'revendas', 'Fabricante', 'id', 'nome');
-        $acessorios = new TDBMultiCombo('acessorios', 'revendas', 'Acessorio', 'id', 'descricao');
-        $acessorios->setSize('100%');
+        $nome = new TEntry('nome');
+        $dt_nascimento = new TEntry('dt_nascimento');
+        $dt_nascimento->setMask('99/99/9999');
+        $dt_nascimento->setValue(date('d/m/Y'));
+        $documento = new TEntry('documento');
+        $tipo_pessoa = new TCombo('tipo_pessoa');
+        $itemsTipoPessoa = ['Física' => 'Física', 'Jurídica' => 'Jurídica'];
+        $tipo_pessoa->addItems($itemsTipoPessoa);
+        $tipo_pessoa->setSize('100%');
+        $tipo_pessoa->setValue('Física');
+        $endereco = new TEntry('endereco');
+        $bairro = new TEntry('bairro');
+        $numero = new TSpinner('numero');
+        $complemento = new TEntry('complemento');
+        $cep = new TEntry('cep');
+        $cep->setMask('99999-999');
+        $cidade = new TEntry('cidade');
+        $fone = new TEntry('fone');
+        $fone->setMask('(99) 99999-9999');
+        $email = new TEntry('email');
 
         $id->setEditable(false);
 
         // add the fields
         $this->form->addFields([new TLabel('ID')], [$id]);
-        $this->form->addFields([new TLabel('Descricao')], [$descricao]);
-        $this->form->addFields([new TLabel('Placa')], [$placa]);
-        $this->form->addFields([new TLabel('Ano')], [$ano]);
-        $this->form->addFields([new TLabel('Cor')], [$cor]);
-        $this->form->addFields([new TLabel('Km')], [$km]);
-        $this->form->addFields([new TLabel('Valor')], [$valor]);
-        $this->form->addFields([new TLabel('Obs')], [$obs]);
-        $this->form->addFields([new TLabel('Fabricante')], [$fabricante_id]);
-        $this->form->addFields([new TLabel('Acessórios')], [$acessorios]);
+        $this->form->addFields([new TLabel('Nome')], [$nome]);
+        $this->form->addFields([new TLabel('Data de Nascimento')], [$dt_nascimento]);
+        $this->form->addFields([new TLabel('Documento')], [$documento]);
+        $this->form->addFields([new TLabel('Tipo de Pessoa')], [$tipo_pessoa]);
+        $this->form->addFields([new TLabel('Endereço')], [$endereco]);
+        $this->form->addFields([new TLabel('Bairro')], [$bairro]);
+        $this->form->addFields([new TLabel('Número')], [$numero]);
+        $this->form->addFields([new TLabel('Complemento')], [$complemento]);
+        $this->form->addFields([new TLabel('CEP')], [$cep]);
+        $this->form->addFields([new TLabel('Cidade')], [$cidade]);
+        $this->form->addFields([new TLabel('Fone')], [$fone]);
+        $this->form->addFields([new TLabel('E-mail')], [$email]);
+
         $id->setSize('30%');
+        $nome->setSize('100%');
+        $dt_nascimento->setSize('100%');
+        $documento->setSize('100%');
+        $tipo_pessoa->setSize('100%');
+        $endereco->setSize('100%');
+        $bairro->setSize('100%');
+        $numero->setSize('100%');
+        $complemento->setSize('100%');
+        $cep->setSize('100%');
+        $cidade->setSize('100%');
+        $fone->setSize('100%');
+        $email->setSize('100%');
+        $email->addValidation('email', new TEmailValidator);
 
         // validations
-        $descricao->addValidation('descricao', new TRequiredValidator);
+        $nome->addValidation('nome', new TRequiredValidator);
 
         // add form actions
         $btn = $this->form->addAction(_t('Save'), new TAction(array($this, 'onSave')), 'far:save');
@@ -88,8 +93,8 @@ class RevendasVeiculosForm extends TStandardForm
 
         $container = new TVBox;
         $container->style = 'width: 100%';
+        // $container->add(new TXMLBreadCrumb('menu.xml','SystemProgramList'));
         $container->add($this->form);
-
         // add the container to the page
         parent::add($container);
     }
@@ -108,8 +113,6 @@ class RevendasVeiculosForm extends TStandardForm
                 TTransaction::open($this->database);
                 $class = $this->activeRecord;
                 $object = new $class($key);
-
-                $object->acessorios = array_column($object->getVeiculosAcessorios(), 'id');
 
                 $this->form->setData($object);
 
@@ -133,28 +136,19 @@ class RevendasVeiculosForm extends TStandardForm
     public function onSave()
     {
         try {
-
             TTransaction::open($this->database);
 
             $data = $this->form->getData();
 
-            $object = new Veiculo();
+            $object = new Cliente;
             $object->fromArray((array) $data);
 
             $this->form->validate();
             $object->store();
-            $object->clearParts();
-
-            if (!empty($data->acessorios)) {
-                foreach ($data->acessorios as $acessorio_id) {
-                    $object->addAcessorio(new Acessorio($acessorio_id));
-                }
-            }
-
             $this->form->setData($object);
 
             TTransaction::close();
-            $pos_action = new TAction(['RevendasVeiculosList', 'onReload']);
+            $pos_action = new TAction(['RevendasClientesList', 'onReload']);
             new TMessage('info', AdiantiCoreTranslator::translate('Record saved'), $pos_action);
 
             return $object;
@@ -175,5 +169,4 @@ class RevendasVeiculosForm extends TStandardForm
     {
         TScript::create("Template.closeRightPanel()");
     }
-
 }
