@@ -1,0 +1,25 @@
+.veiculo-view-main {
+  display: flex;
+  flex-direction: column;
+  row-gap: 1rem;
+  padding: .4em 1em;
+}
+
+.veiculo-view-main>div:first-child>label {
+  user-select: auto;
+  cursor: auto;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+
+.veiculo-view-main>div:nth-child(n+2)>label:first-child {
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.veiculo-view-main .fabricante div img {
+  max-width: 200px;
+  border-radius: 5px;
+  object-fit: fill;
+}

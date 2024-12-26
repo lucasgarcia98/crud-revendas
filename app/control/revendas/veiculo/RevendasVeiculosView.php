@@ -9,25 +9,12 @@ class RevendasVeiculosView extends TPage
   {
     parent::__construct();
     TTransaction::open('revendas');
-
+    parent::include_css('app/resources/revendas/revendas.css');
     $veiculo = new Veiculo($params['id']);
     $html = new THtmlRenderer('app/resources/revendas/veiculo_view.html');
 
     $acessorios = $veiculo->getVeiculosAcessorios();
-    $stringAcessorios = '';
 
-    if ($acessorios) {
-      if (count($acessorios) > 1) {
-        foreach ($acessorios as $acessorio) {
-          $stringAcessorios .= $acessorio->descricao . ', ';
-        }
-      } else {
-        $stringAcessorios = $acessorios[0]->descricao;
-      }
-    }
-
-    $stringAcessorios = trim($stringAcessorios);
-    $stringAcessorios = rtrim($stringAcessorios, ',');
 
     $html->enableSection('main', [
       'descricao' => $veiculo->descricao,
@@ -37,11 +24,33 @@ class RevendasVeiculosView extends TPage
       'km' => $veiculo->km,
       'valor' => $veiculo->valor,
       'obs' => $veiculo->obs,
-      'fabricante' => $veiculo->fabricante->nome,
-      'fabricante_logo' => 'tmp/' . $veiculo->fabricante->logo,
-      'acessorios' => $stringAcessorios
     ]);
 
+    if ($veiculo->fabricante) {
+      $html->enableSection('fabricante', [
+        'nome_fabricante' => $veiculo->fabricante->nome,
+        'logo_fabricante' => $veiculo->fabricante->logo ? 'tmp/' . $veiculo->fabricante->logo : ''
+      ]);
+    }
+
+    if ($acessorios) {
+      $stringAcessorios = '';
+
+      if (count($acessorios) > 1) {
+        foreach ($acessorios as $acessorio) {
+          $stringAcessorios .= $acessorio->descricao . ', ';
+        }
+      } else {
+        $stringAcessorios = $acessorios[0]->descricao;
+      }
+
+      $stringAcessorios = trim($stringAcessorios);
+      $stringAcessorios = rtrim($stringAcessorios, ',');
+
+      $html->enableSection('acessorios', [
+        'lista_acessorios' => $stringAcessorios
+      ]);
+    }
 
     TTransaction::close();
 

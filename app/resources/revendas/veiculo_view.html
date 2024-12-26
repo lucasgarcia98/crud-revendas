@@ -1,7 +1,6 @@
 <!--[main]-->
-<div class="d-flex flex-column" style="row-gap: 1rem;padding: .4em 1em;">
+<div class="veiculo-view-main">
     <div>
-        <label>Descrição: </label>
         <label>{$descricao}</label>
     </div>
     <div>
@@ -28,15 +27,21 @@
         <label>Observações: </label>
         <label>{$obs}</label>
     </div>
-    <div>
+    <!--[fabricante]-->
+    <div class="fabricante">
         <label>Fabricante: </label>
-        <label>{$fabricante}</label>
-        <img src="{$fabricante_logo}" alt="{$fabricante}"
-            style="width: 50px;height: 50px;">
+        <div>
+            <img src="{$logo_fabricante}" alt="{$nome_fabricante}">
+            <label>{$nome_fabricante}</label>
+
+        </div>
     </div>
+    <!--[/fabricante]-->
+    <!--[acessorios]-->
     <div>
         <label>Acessórios: </label>
-        <label>{$acessorios}</label>
+        <label>{$lista_acessorios}</label>
     </div>
+    <!--[/acessorios]-->
 </div>
 <!--[/main]-->
