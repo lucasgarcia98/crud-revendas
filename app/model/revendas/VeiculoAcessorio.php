@@ -3,6 +3,7 @@
 use Adianti\Database\TRecord;
 class VeiculoAcessorio extends TRecord
 {
+  use SystemChangeLogTrait;
   const TABLENAME = 'veiculos_acessorios';
   const PRIMARYKEY = 'id';
   const IDPOLICY = 'max'; // {max, serial}

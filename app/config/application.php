@@ -1,31 +1,29 @@
 <?php
 return [
-    'general' =>  [
+    'general' => [
         'timezone' => 'America/Sao_Paulo',
         'language' => 'pt',
         'application' => 'template',
-        'title' => 'Adianti Template 8.0',
+        'title' => 'Revendas de Veículos',
         'theme' => 'adminbs5',
         'seed' => 'odfu6asnodf8as',
         'rest_key' => '',
-        'multiunit' => '1',
+        'multiunit' => '0',
         'public_view' => '0',
         'public_entry' => '',
         'debug' => '1',
-        'multi_lang' => '1',
+        'multi_lang' => '0',
         'require_terms' => '0',
         'concurrent_sessions' => '1',
         'lang_options' => [
-          'pt' => 'Português',
-          'en' => 'English',
-          'es' => 'Español',
+            'pt' => 'Português'
         ],
         'multi_database' => '0',
-        'validate_strong_pass' => '1',
+        'validate_strong_pass' => '0',
         'notification_login' => '0',
-        'welcome_message' => 'Have a great jorney!',
+        'welcome_message' => 'Bem-vindo ao sistema de revendas de veículos!',
         'request_log_service' => 'SystemRequestLogService',
-        'request_log' => '0',
+        'request_log' => '1',
         'request_log_types' => 'cli,web,rest',
         /*'password_renewal_interval' => '',*/
     ],
@@ -34,12 +32,12 @@ return [
         'key' => '...',
         'secret' => '...'
     ],
-    'permission' =>  [
+    'permission' => [
         'public_classes' => [
-          'SystemRequestPasswordResetForm',
-          'SystemPasswordResetForm',
-          'SystemRegistrationForm',
-          'SystemPasswordRenewalForm',
+            'SystemRequestPasswordResetForm',
+            'SystemPasswordResetForm',
+            'SystemRegistrationForm',
+            'SystemPasswordRenewalForm',
         ],
         'user_register' => '1',
         'reset_password' => '1',
@@ -62,22 +60,22 @@ return [
         'navbar' => [
             'has_program_search' => '1',
             'has_notifications' => '1',
-            'has_messages' => '1',
-            'has_docs' => '1',
-            'has_contacts' => '1',
-            'has_support_form' => '1',
-            'has_wiki' => '1',
-            'has_news' => '1',
-            'has_menu_mode_switch' => '1',
-            'has_main_mode_switch' => '1'
+            'has_messages' => '0',
+            'has_docs' => '0',
+            'has_contacts' => '0',
+            'has_support_form' => '0',
+            'has_wiki' => '0',
+            'has_news' => '0',
+            'has_menu_mode_switch' => '0',
+            'has_main_mode_switch' => '0'
         ],
         'dialogs' => [
             'use_swal' => '1'
         ],
         'theme' => [
             'menu_dark_color' => 'rgb(29 45 83)',
-            'menu_mode'  => 'dark',
-            'main_mode'  => 'light'
+            'menu_mode' => 'dark',
+            'main_mode' => 'dark'
         ]
     ]
 ];

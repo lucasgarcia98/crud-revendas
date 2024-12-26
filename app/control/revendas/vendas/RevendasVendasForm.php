@@ -40,7 +40,11 @@ class RevendasVendasForm extends TStandardForm
         $obs = new TText('obs');
 
         $cliente_id = new TDBCombo('cliente_id', 'revendas', 'Cliente', 'id', 'nome');
+        $cliente_id->enableSearch();
+        $cliente_id->setSize('100%');
         $veiculo_id = new TDBCombo('veiculo_id', 'revendas', 'Veiculo', 'id', 'descricao');
+        $veiculo_id->enableSearch();
+        $veiculo_id->setSize('100%');
 
         $id->setEditable(false);
 

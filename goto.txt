@@ -16,4 +16,5 @@ veiculo: descricao, placa, ano - TSpinner, cor - combo, fabricante(fk), km, aces
 
 venda: dt_venda, cliente(fk), veiculo(fk), valor - numeric, obs - textarea
 
+Adicionar view com htmlRenderer para listagem de veiculos
  */

@@ -3,6 +3,7 @@
 use Adianti\Database\TRecord;
 class Fabricante extends TRecord
 {
+  use SystemChangeLogTrait;
   const TABLENAME = 'fabricantes';
   const PRIMARYKEY = 'id';
   const IDPOLICY = 'max'; // {max, serial}

@@ -54,7 +54,7 @@ class RevendasVeiculosForm extends TStandardForm
         $valor = new TNumeric('valor', 2, ',', '.', true);
 
         $obs = new TText('obs');
-
+        $obs->setSize('100%', 120);
         $fabricante_id = new TDBCombo('fabricante_id', 'revendas', 'Fabricante', 'id', 'nome');
         $acessorios = new TDBMultiCombo('acessorios', 'revendas', 'Acessorio', 'id', 'descricao');
         $acessorios->setSize('100%');

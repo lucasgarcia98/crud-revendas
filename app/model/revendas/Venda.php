@@ -3,6 +3,7 @@
 use Adianti\Database\TRecord;
 class Venda extends TRecord
 {
+  use SystemChangeLogTrait;
   const TABLENAME = 'vendas';
   const PRIMARYKEY = 'id';
   const IDPOLICY = 'max'; // {max, serial}

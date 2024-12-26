@@ -1,5 +1,8 @@
 <?php
 
+use Adianti\Control\TWindow;
+use Adianti\Database\TTransaction;
+
 class RevendasVeiculosList extends TStandardList
 {
     protected $form;     // registration form
@@ -163,6 +166,13 @@ class RevendasVeiculosList extends TStandardList
         $action_del->setField('id');
         $this->datagrid->addAction($action_del);
 
+        $action_show = new TDataGridAction([$this, 'onView'], ["veiculo_id" => "{id}"]);
+        $action_show->setButtonClass('btn btn-default');
+        $action_show->setLabel('Visualizar');
+        $action_show->setImage('far:eye green ');
+        $action_show->setField('id');
+        $this->datagrid->addAction($action_show);
+
         // create the datagrid model
         $this->datagrid->createModel();
 
@@ -209,43 +219,35 @@ class RevendasVeiculosList extends TStandardList
         }
     }
 
-    /**
-     *
-     */
-    public static function onChangeLimit($param)
+    public static function onView($params)
     {
-        TSession::setValue(__CLASS__ . '_limit', $param['limit']);
-        AdiantiCoreApplication::loadPage(__CLASS__, 'onReload');
-    }
+        $id = $params['id'] ?? NULL;
+        if (!$id) {
+            return;
+        }
 
-    /**
-     *
-     */
-    public static function onShowCurtainFilters($param = null)
-    {
         try {
-            // create empty page for right panel
-            $page = new TPage;
-            $page->setTargetContainer('adianti_right_panel');
-            $page->setProperty('override', 'true');
-            $page->setPageName(__CLASS__);
+            TTransaction::open('revendas');
 
-            $btn_close = new TButton('closeCurtain');
-            $btn_close->onClick = "Template.closeRightPanel();";
-            $btn_close->setLabel("Fechar");
-            $btn_close->setImage('fas:times');
+            $veiculo = new Veiculo($params['veiculo_id']);
 
-            // instantiate self class, populate filters in construct 
-            $embed = new self;
-            $embed->form->addHeaderWidget($btn_close);
 
-            // embed form inside curtain
-            $page->add($embed->form);
-            $page->setIsWrapped(true);
-            $page->show();
+            AdiantiCoreApplication::loadPage(
+                (RevendasVeiculosView::class),
+                'onShow',
+                [
+                    'register_state' => 'true',
+                    'key' => $id,
+                    'id' => $id,
+                ]
+            );
+
+            TTransaction::close();
         } catch (Exception $e) {
+            TTransaction::rollback();
             new TMessage('error', $e->getMessage());
         }
+
     }
 
 }
